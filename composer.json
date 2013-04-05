@@ -1,0 +1,14 @@
+{
+    "autoload":{
+        "psr-0":{
+            "Flagbit":"src/"
+        }
+    },
+    "require":{
+        "andrewsville/php-token-reflection":"1.3.*",
+        "symfony/console":"2.2.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
