@@ -1,5 +1,13 @@
 {
     "name": "davidfuhr/php-plantumlwriter",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "David Fuhr",
+            "homepage": "http://www.davidfuhr.de",
+            "role": "Developer"
+        }
+    ],
     "autoload":{
         "psr-0":{
             "Flagbit":"src/"
