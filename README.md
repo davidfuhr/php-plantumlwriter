@@ -4,7 +4,7 @@ php-plantumlwriter
 Description
 -----------
 
-A tool to create PlantUML class diagrams from your PHP source.
+A tool to create [PlantUML](http://plantuml.sourceforge.net/) class diagrams from your PHP source.
 
 Currently the following language features are supported:
 
