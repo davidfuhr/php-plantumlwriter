@@ -1,4 +1,5 @@
 {
+    "name": "davidfuhr/php-plantumlwriter",
     "autoload":{
         "psr-0":{
             "Flagbit":"src/"
