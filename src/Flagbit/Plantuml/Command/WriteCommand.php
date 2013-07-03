@@ -18,7 +18,9 @@ class WriteCommand extends Command
                 'files',
                 InputArgument::IS_ARRAY
             )
-            ->addOption('no-methods');
+            ->addOption('without-constants', null, null, 'Disables rendering of constants')
+            ->addOption('without-methods', null, null, 'Disables rendering of methods')
+            ->addOption('without-properties', null, null, 'Disables rendering of properties');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -35,9 +37,13 @@ class WriteCommand extends Command
         }
 
         $classWriter = new \Flagbit\Plantuml\TokenReflection\ClassWriter();
-        $classWriter->setConstantWriter(new \Flagbit\Plantuml\TokenReflection\ConstantWriter());
-        $classWriter->setPropertyWriter(new \Flagbit\Plantuml\TokenReflection\PropertyWriter());
-        if (!$input->getOption('no-methods')) {
+        if (!$input->getOption('without-constants')) {
+            $classWriter->setConstantWriter(new \Flagbit\Plantuml\TokenReflection\ConstantWriter());
+        }
+        if (!$input->getOption('without-properties')) {
+            $classWriter->setPropertyWriter(new \Flagbit\Plantuml\TokenReflection\PropertyWriter());
+        }
+        if (!$input->getOption('without-methods')) {
             $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter());
         }
 
