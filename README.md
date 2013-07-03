@@ -1,4 +1,4 @@
-php-plantumlwriter
+php-plantumlwriter [![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter)
 ==================
 
 Description
