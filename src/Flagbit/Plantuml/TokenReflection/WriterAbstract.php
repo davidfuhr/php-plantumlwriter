@@ -30,7 +30,7 @@ abstract class WriterAbstract
 
     /**
      * @param string $className
-     * @return mixed
+     * @return string
      */
     protected function formatClassName($className)
     {
