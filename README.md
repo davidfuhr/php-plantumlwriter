@@ -33,9 +33,9 @@ which will output
     class Flagbit.Plantuml.Command.WriteCommand extends Symfony.Component.Console.Command.Command
     @enduml
 
-If you have a large class with lots of methods you can suppress method printing using the `--no-methods` flag:
+If you have a large class with lots of methods you can suppress method printing using the `--without-methods` flag:
 
-    php bin/console.php write --no-methods path/to/your/LargeClass.php
+    php bin/console.php write --without-methods path/to/your/LargeClass.php
 
 You can also generate a whole directory at once:
 
