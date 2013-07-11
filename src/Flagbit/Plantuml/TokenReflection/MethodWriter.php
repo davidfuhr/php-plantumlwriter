@@ -25,6 +25,8 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
     {
         // see https://bugs.php.net/bug.php?id=50688
         @usort($methods, function($a, $b) {
+            /* @var $a \TokenReflection\IReflectionMethod */
+            /* @var $b \TokenReflection\IReflectionMethod */
             return strnatcasecmp($a->getName(), $b->getName());
         });
 
@@ -70,9 +72,9 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
     private function writeReturnType(IReflectionMethod $method)
     {
         $returnType = '';
-        preg_match('/\*\h+@return\h+(\w+)/', (string) $method->getDocComment(), $matches);
+        preg_match('/\*\h+@return\h+([^\h]+)/', (string) $method->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $returnType = ': ' . $matches[1];
+            $returnType = ': ' . $this->formatClassName($matches[1]);
         }
         return $returnType;
     }

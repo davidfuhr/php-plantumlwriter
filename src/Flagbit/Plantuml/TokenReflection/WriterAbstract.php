@@ -30,10 +30,14 @@ abstract class WriterAbstract
 
     /**
      * @param string $className
-     * @return mixed
+     * @return string
      */
     protected function formatClassName($className)
     {
-        return str_replace('\\', '.', $className);
+        $className = str_replace('\\', '.', trim($className));
+        if ('.' === $className[0]) {
+            $className = substr($className, 1);
+        }
+        return $className;
     }
 }

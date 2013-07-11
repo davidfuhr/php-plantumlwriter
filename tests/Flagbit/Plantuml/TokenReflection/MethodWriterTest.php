@@ -2,6 +2,9 @@
 
 namespace Flagbit\Test\Plantuml\TokenReflection;
 
+/**
+ * @covers \Flagbit\Plantuml\TokenReflection\MethodWriter
+ */
 class MethodWriterTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -76,5 +79,29 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         $this->assertEquals("    +myMethodName()\n", $this->methodWriter->writeElement($methodMock));
+    }
+
+    public function testWriteReturnValue()
+    {
+        $methodMock = $this->getMethodMock();
+        $methodMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @return string
+ */'));
+
+        $this->assertStringEndsWith(": string\n", $this->methodWriter->writeElement($methodMock));
+    }
+
+    public function testWriteNamespacedClassReturnValue()
+    {
+        $methodMock = $this->getMethodMock();
+        $methodMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @return \\Flagbit\\TestClass
+ */'));
+
+        $this->assertStringEndsWith(": Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
 }

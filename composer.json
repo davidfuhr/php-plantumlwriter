@@ -8,13 +8,16 @@
             "role": "Developer"
         }
     ],
-    "autoload":{
-        "psr-0":{
-            "Flagbit":"src/"
+    "autoload": {
+        "psr-0": {
+            "Flagbit": "src/"
         }
     },
-    "require":{
-        "andrewsville/php-token-reflection":"1.3.*",
-        "symfony/console":"2.3.*"
+    "require": {
+        "andrewsville/php-token-reflection": "1.3.*",
+        "symfony/console": "2.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     }
 }
