@@ -60,6 +60,12 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
             if ($parameter->getClassName()) {
                 $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
             }
+            else {
+                preg_match('/\*\h+@param\h+([^\h]+)\h+\$' . preg_quote($parameterString). '\s/', (string) $method->getDocComment(), $matches);
+                if (isset($matches[1])) {
+                    $parameterString .= ': ' . $this->formatClassName($matches[1]);
+                }
+            }
             $parameters[] = $parameterString;
         }
         return '(' . implode(', ' , $parameters) . ')';
