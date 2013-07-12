@@ -118,6 +118,23 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('(someParameter: string)', $this->methodWriter->writeElement($methodMock));
     }
 
+    public function testWriteParameterDefaultValue()
+    {
+        $parameterMock = $this->getMockBuilder('\\TokenReflection\\IReflectionParameter')
+            ->getMock();
+        $parameterMock->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('someParameter'));
+        $parameterMock->expects($this->any())
+            ->method('isDefaultValueAvailable')
+            ->will($this->returnValue(true));
+
+        $this->methodParameters = array($parameterMock);
+        $methodMock = $this->getMethodMock();
+
+        $this->assertContains('(someParameter = null)', $this->methodWriter->writeElement($methodMock));
+    }
+
     public function testWriteReturnValue()
     {
         $methodMock = $this->getMethodMock();

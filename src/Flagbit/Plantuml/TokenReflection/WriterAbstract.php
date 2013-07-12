@@ -40,4 +40,19 @@ abstract class WriterAbstract
         }
         return $className;
     }
+
+    /**
+     * @param mixed $value
+     * @return string
+     */
+    protected function formatValue($value)
+    {
+        if (is_null($value)) {
+            $value = 'null';
+        }
+        else {
+            $value = (string) $value;
+        }
+        return $value;
+    }
 }

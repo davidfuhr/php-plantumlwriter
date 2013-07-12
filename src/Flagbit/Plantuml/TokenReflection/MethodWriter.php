@@ -3,6 +3,7 @@
 namespace Flagbit\Plantuml\TokenReflection;
 
 use TokenReflection\IReflectionMethod;
+use TokenReflection\IReflectionParameter;
 
 class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
 {
@@ -56,19 +57,35 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
         $parameters = array();
         foreach ($method->getParameters() as $parameter) {
             /** @var $parameter \TokenReflection\IReflectionParameter */
-            $parameterString = $parameter->getName();
-            if ($parameter->getClassName()) {
-                $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
-            }
-            else {
-                preg_match('/\*\h+@param\h+([^\h]+)\h+\$' . preg_quote($parameterString). '\s/', (string) $method->getDocComment(), $matches);
-                if (isset($matches[1])) {
-                    $parameterString .= ': ' . $this->formatClassName($matches[1]);
-                }
-            }
-            $parameters[] = $parameterString;
+            $parameters[] = $this->writeParameter($method, $parameter);
         }
         return '(' . implode(', ' , $parameters) . ')';
+    }
+
+    /**
+     * @param IReflectionMethod $method
+     * @param IReflectionParameter $parameter
+     * @return string
+     */
+    private function writeParameter(IReflectionMethod $method, IReflectionParameter $parameter)
+    {
+        $parameterString = $parameter->getName();
+
+        if ($parameter->getClassName()) {
+            $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
+        }
+        else {
+            preg_match('/\*\h+@param\h+([^\h]+)\h+\$' . preg_quote($parameterString). '\s/', (string) $method->getDocComment(), $matches);
+            if (isset($matches[1])) {
+                $parameterString .= ': ' . $this->formatClassName($matches[1]);
+            }
+        }
+
+        if ($parameter->isDefaultValueAvailable()) {
+            $parameterString .= ' = ' . $this->formatValue($parameter->getDefaultValue());
+        }
+
+        return $parameterString;
     }
 
     /**

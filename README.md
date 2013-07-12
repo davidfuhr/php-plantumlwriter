@@ -11,7 +11,8 @@ Currently the following language features are supported:
 - Property and method visibility
 - Static properties and methods
 - Method return types from doc comment
-- Method parameter types from type hinting and doc comment
+- Parameter types from type hinting and doc comment
+- Parameter default values
 - Class constants with value
 - Property type froms doc comment
 - Implemented interfaces and parent classes
