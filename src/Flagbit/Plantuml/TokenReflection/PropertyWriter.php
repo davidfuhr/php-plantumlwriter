@@ -48,7 +48,7 @@ class PropertyWriter extends WriterAbstract
      * @param \TokenReflection\IReflectionProperty $property
      * @return string
      */
-    private function writeType(IReflectionProperty $property)
+    public function writeType(IReflectionProperty $property)
     {
         $type = '';
         preg_match('/\*\h+@var\h+([^\h]+)/', (string) $property->getDocComment(), $matches);
@@ -58,12 +58,17 @@ class PropertyWriter extends WriterAbstract
         return $type;
     }
 
-    private function writeValue(IReflectionProperty $property)
+    /**
+     * @param IReflectionProperty $property
+     * @return string
+     */
+    public function writeValue(IReflectionProperty $property)
     {
         $value = '';
-        $defaultProperties = $property->getDeclaringClass()->getDefaultProperties();
-        if (!is_null($defaultProperties[$property->getName()])) {
-            $value = ' = ' . $this->formatValue($defaultProperties[$property->getName()]);
+        if ($property->getDeclaringClass() && $defaultProperties = $property->getDeclaringClass()->getDefaultProperties()) {
+            if (!is_null($defaultProperties[$property->getName()])) {
+               $value = ' = ' . $this->formatValue($defaultProperties[$property->getName()]);
+            }
         }
         return $value;
     }
