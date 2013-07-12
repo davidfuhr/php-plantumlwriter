@@ -51,9 +51,9 @@ class PropertyWriter extends WriterAbstract
     private function writeType(IReflectionProperty $property)
     {
         $type = '';
-        preg_match('/\*\h+@var\h+(\w+)/', (string) $property->getDocComment(), $matches);
+        preg_match('/\*\h+@var\h+([^\h]+)/', (string) $property->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $type = ': ' . $matches[1];
+            $type = ': ' . $this->formatClassName($matches[1]);
         }
         return $type;
     }
