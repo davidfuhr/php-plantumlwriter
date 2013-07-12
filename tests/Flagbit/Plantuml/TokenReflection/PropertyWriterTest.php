@@ -2,6 +2,9 @@
 
 namespace Flagbit\Test\Plantuml\TokenReflection;
 
+/**
+ * @covers \Flagbit\Plantuml\TokenReflection\PropertyWriter
+ */
 class PropertyWriterTest extends \PHPUnit_Framework_TestCase
 {
     /**

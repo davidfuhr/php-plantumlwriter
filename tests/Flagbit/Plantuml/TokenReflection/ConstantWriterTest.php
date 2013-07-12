@@ -2,6 +2,9 @@
 
 namespace Flagbit\Test\Plantuml\TokenReflection;
 
+/**
+ * @covers \Flagbit\Plantuml\TokenReflection\ConstantWriter
+ */
 class ConstantWriterTest extends \PHPUnit_Framework_TestCase
 {
     /**
