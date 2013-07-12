@@ -51,7 +51,7 @@ abstract class WriterAbstract
             $value = 'null';
         }
         else {
-            $value = (string) $value;
+            $value = '"' . $value . '"';
         }
         return $value;
     }

@@ -13,7 +13,7 @@ class PropertyWriter extends WriterAbstract
     public function writeElement(IReflectionProperty $property)
     {
         return $this->formatLine($this->writeVisibility($property) . $property->getName()
-            . $this->writeType($property));
+            . $this->writeType($property) . $this->writeValue($property));
     }
 
     /**
@@ -56,5 +56,15 @@ class PropertyWriter extends WriterAbstract
             $type = ': ' . $this->formatClassName($matches[1]);
         }
         return $type;
+    }
+
+    private function writeValue(IReflectionProperty $property)
+    {
+        $value = '';
+        $defaultProperties = $property->getDeclaringClass()->getDefaultProperties();
+        if (!is_null($defaultProperties[$property->getName()])) {
+            $value = ' = ' . $this->formatValue($defaultProperties[$property->getName()]);
+        }
+        return $value;
     }
 }
