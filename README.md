@@ -15,6 +15,7 @@ Currently the following language features are supported:
 - Parameter default values
 - Class constants with value
 - Property type froms doc comment
+- Property default values
 - Implemented interfaces and parent classes
 
 Usage
