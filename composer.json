@@ -15,7 +15,7 @@
     ],
     "support": {
         "issues": "https://github.com/davidfuhr/php-plantumlwriter/issues",
-        "source": "git@github.com:davidfuhr/php-plantumlwriter.git"
+        "source": "https://github.com/davidfuhr/php-plantumlwriter.git"
     },
     "autoload": {
         "psr-0": {
