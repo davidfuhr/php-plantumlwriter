@@ -14,7 +14,7 @@ Currently the following language features are supported:
 - Parameter types from type hinting and doc comment
 - Parameter default values
 - Class constants with value
-- Property type froms doc comment
+- Property types from doc comment
 - Property default values
 - Implemented interfaces and parent classes
 
@@ -46,3 +46,9 @@ You can also generate a whole directory at once:
 Or multiple files or directories:
 
     php bin/console.php write path/to/ClassOne.php path/to/ClassTwo.php path/to/directory
+
+Limitations
+-----------
+
+- Imported classes are currently not handled correctly if read from doc comment
+  (use-Statement is not evaluated) which affects return values and property types
