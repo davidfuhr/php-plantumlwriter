@@ -51,6 +51,13 @@ abstract class WriterAbstract
             $value = 'null';
         }
         else {
+            // make sure we receive two backslashes in the output as
+            // plantuml needs them escaped as well
+            $value = strtr($value, array(
+                "\n" => '\\\\n',
+                "\r" => '\\\\r',
+                "\t" => '\\\\t',
+            ));
             $value = '"' . $value . '"';
         }
         return $value;
