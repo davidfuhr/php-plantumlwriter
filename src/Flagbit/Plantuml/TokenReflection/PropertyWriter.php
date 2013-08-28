@@ -13,7 +13,7 @@ class PropertyWriter extends WriterAbstract
     public function writeElement(IReflectionProperty $property)
     {
         return $this->formatLine($this->writeVisibility($property) . $property->getName()
-            . $this->writeType($property));
+            . $this->writeType($property) . $this->writeValue($property));
     }
 
     /**
@@ -48,13 +48,28 @@ class PropertyWriter extends WriterAbstract
      * @param \TokenReflection\IReflectionProperty $property
      * @return string
      */
-    private function writeType(IReflectionProperty $property)
+    public function writeType(IReflectionProperty $property)
     {
         $type = '';
-        preg_match('/\*\h+@var\h+(\w+)/', (string) $property->getDocComment(), $matches);
+        preg_match('/\*\h+@var\h+([^\h]+)/', (string) $property->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $type = ': ' . $matches[1];
+            $type = ': ' . $this->formatClassName($matches[1]);
         }
         return $type;
+    }
+
+    /**
+     * @param IReflectionProperty $property
+     * @return string
+     */
+    public function writeValue(IReflectionProperty $property)
+    {
+        $value = '';
+        if ($property->getDeclaringClass() && $defaultProperties = $property->getDeclaringClass()->getDefaultProperties()) {
+            if (!is_null($defaultProperties[$property->getName()])) {
+               $value = ' = ' . $this->formatValue($defaultProperties[$property->getName()]);
+            }
+        }
+        return $value;
     }
 }

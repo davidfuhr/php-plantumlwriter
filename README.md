@@ -11,9 +11,11 @@ Currently the following language features are supported:
 - Property and method visibility
 - Static properties and methods
 - Method return types from doc comment
-- Method parameter types from type hinting
+- Parameter types from type hinting and doc comment
+- Parameter default values
 - Class constants with value
-- Property type froms doc comment
+- Property types from doc comment
+- Property default values
 - Implemented interfaces and parent classes
 
 Usage
@@ -33,7 +35,7 @@ which will output
     class Flagbit.Plantuml.Command.WriteCommand extends Symfony.Component.Console.Command.Command
     @enduml
 
-If you have a large class with lots of methods you can suppress method printing using the `--no-methods` flag:
+If you have a large class with lots of methods you can suppress method printing using the `--without-methods` flag:
 
     php bin/console.php write --without-methods path/to/your/LargeClass.php
 
@@ -46,3 +48,9 @@ You can also generate a whole directory at once:
 Or multiple files or directories:
 
     php bin/console.php write path/to/ClassOne.php path/to/ClassTwo.php path/to/directory
+
+Limitations
+-----------
+
+- Imported classes are currently not handled correctly if read from doc comment
+  (use-Statement is not evaluated) which affects return values and property types

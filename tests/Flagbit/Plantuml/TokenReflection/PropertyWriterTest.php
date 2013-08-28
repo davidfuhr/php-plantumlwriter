@@ -2,10 +2,13 @@
 
 namespace Flagbit\Test\Plantuml\TokenReflection;
 
+/**
+ * @covers \Flagbit\Plantuml\TokenReflection\PropertyWriter
+ */
 class PropertyWriterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \Flagbit\Plantuml\TokenReflection\MethodWriter
+     * @var \Flagbit\Plantuml\TokenReflection\PropertyWriter
      */
     protected $propertyWriter;
 
@@ -72,5 +75,29 @@ class PropertyWriterTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue(true));
 
         $this->assertEquals("    +myPropertyName\n", $this->propertyWriter->writeElement($propertyMock));
+    }
+
+    public function testWriteType()
+    {
+        $propertyMock = $this->getPropertyMock();
+        $propertyMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @var string
+ */'));
+
+        $this->assertStringEndsWith(": string\n", $this->propertyWriter->writeElement($propertyMock));
+    }
+
+    public function testWriteNamespacedClassType()
+    {
+        $propertyMock = $this->getPropertyMock();
+        $propertyMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @var \\Flagbit\\TestClass
+ */'));
+
+        $this->assertStringEndsWith(": Flagbit.TestClass\n", $this->propertyWriter->writeElement($propertyMock));
     }
 }

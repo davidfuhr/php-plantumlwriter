@@ -1,5 +1,10 @@
 {
     "name": "davidfuhr/php-plantumlwriter",
+    "description": "A tool to create PlantUML class diagrams from your PHP source.",
+    "type": "project",
+    "keywords": [
+        "uml"
+    ],
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -8,13 +13,20 @@
             "role": "Developer"
         }
     ],
-    "autoload":{
-        "psr-0":{
-            "Flagbit":"src/"
+    "support": {
+        "issues": "https://github.com/davidfuhr/php-plantumlwriter/issues",
+        "source": "https://github.com/davidfuhr/php-plantumlwriter.git"
+    },
+    "autoload": {
+        "psr-0": {
+            "Flagbit": "src/"
         }
     },
-    "require":{
-        "andrewsville/php-token-reflection":"1.3.*",
-        "symfony/console":"2.3.*"
+    "require": {
+        "andrewsville/php-token-reflection": "1.3.*",
+        "symfony/console": "2.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     }
 }

@@ -3,6 +3,7 @@
 namespace Flagbit\Plantuml\TokenReflection;
 
 use TokenReflection\IReflectionMethod;
+use TokenReflection\IReflectionParameter;
 
 class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
 {
@@ -25,6 +26,8 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
     {
         // see https://bugs.php.net/bug.php?id=50688
         @usort($methods, function($a, $b) {
+            /* @var $a \TokenReflection\IReflectionMethod */
+            /* @var $b \TokenReflection\IReflectionMethod */
             return strnatcasecmp($a->getName(), $b->getName());
         });
 
@@ -54,13 +57,35 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
         $parameters = array();
         foreach ($method->getParameters() as $parameter) {
             /** @var $parameter \TokenReflection\IReflectionParameter */
-            $parameterString = $parameter->getName();
-            if ($parameter->getClassName()) {
-                $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
-            }
-            $parameters[] = $parameterString;
+            $parameters[] = $this->writeParameter($method, $parameter);
         }
         return '(' . implode(', ' , $parameters) . ')';
+    }
+
+    /**
+     * @param IReflectionMethod $method
+     * @param IReflectionParameter $parameter
+     * @return string
+     */
+    private function writeParameter(IReflectionMethod $method, IReflectionParameter $parameter)
+    {
+        $parameterString = $parameter->getName();
+
+        if ($parameter->getClassName()) {
+            $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
+        }
+        else {
+            preg_match('/\*\h+@param\h+([^\h]+)\h+\$' . preg_quote($parameterString). '\s/', (string) $method->getDocComment(), $matches);
+            if (isset($matches[1])) {
+                $parameterString .= ': ' . $this->formatClassName($matches[1]);
+            }
+        }
+
+        if ($parameter->isDefaultValueAvailable()) {
+            $parameterString .= ' = ' . $this->formatValue($parameter->getDefaultValue());
+        }
+
+        return $parameterString;
     }
 
     /**
@@ -70,9 +95,9 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
     private function writeReturnType(IReflectionMethod $method)
     {
         $returnType = '';
-        preg_match('/\*\h+@return\h+(\w+)/', (string) $method->getDocComment(), $matches);
+        preg_match('/\*\h+@return\h+([^\h]+)/', (string) $method->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $returnType = ': ' . $matches[1];
+            $returnType = ': ' . $this->formatClassName($matches[1]);
         }
         return $returnType;
     }

@@ -76,8 +76,12 @@ class ClassWriter extends WriterAbstract
             $classString .= $this->formatLine('class ' . $this->formatClassName($class->getName()) . ' extends ' . $this->formatClassName($class->getParentClassName()));
         }
 
-        if ($class->getInterfaceNames()) {
-            foreach ($class->getInterfaceNames() as $interfaceName) {
+        if ($interfaceNames = $class->getInterfaceNames()) {
+            if ($class->getParentClass()) {
+                $interfaceNames = array_diff($interfaceNames, $class->getParentClass()->getInterfaceNames());
+            }
+
+            foreach ($interfaceNames as $interfaceName) {
                 $classString .= $this->formatLine('class ' . $this->formatClassName($class->getName()) . ' implements ' . $this->formatClassName($interfaceName));
             }
         }

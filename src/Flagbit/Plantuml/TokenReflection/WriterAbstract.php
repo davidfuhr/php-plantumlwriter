@@ -34,6 +34,25 @@ abstract class WriterAbstract
      */
     protected function formatClassName($className)
     {
-        return str_replace('\\', '.', $className);
+        $className = str_replace('\\', '.', trim($className));
+        if ('.' === $className[0]) {
+            $className = substr($className, 1);
+        }
+        return $className;
+    }
+
+    /**
+     * @param mixed $value
+     * @return string
+     */
+    protected function formatValue($value)
+    {
+        if (is_null($value)) {
+            $value = 'null';
+        }
+        else {
+            $value = '"' . $value . '"';
+        }
+        return $value;
     }
 }
