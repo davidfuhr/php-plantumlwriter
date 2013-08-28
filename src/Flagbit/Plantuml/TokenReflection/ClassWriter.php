@@ -56,7 +56,7 @@ class ClassWriter extends WriterAbstract
      */
     public function writeElement(IReflectionClass $class)
     {
-        $classString = $this->formatLine('class ' . $this->formatClassName($class->getName()) . ' {');
+        $classString = $this->formatLine($this->writeAbstract($class) . 'class ' . $this->formatClassName($class->getName()) . ' {');
 
         if ($this->constantWriter) {
             $classString .= $this->constantWriter->writeElements($class->getConstantReflections());
@@ -87,5 +87,18 @@ class ClassWriter extends WriterAbstract
         }
 
         return $classString;
+    }
+
+    /**
+     * @param IReflectionClass $class
+     * @return string
+     */
+    private function writeAbstract(IReflectionClass $class)
+    {
+        $return = '';
+        if (true === $class->isAbstract()) {
+            $return = 'abstract ';
+        }
+        return $return;
     }
 }
