@@ -17,6 +17,7 @@ Currently the following language features are supported:
 - Property types from doc comment
 - Property default values
 - Implemented interfaces and parent classes
+- Abstract classes
 
 Usage
 -----
@@ -53,4 +54,6 @@ Limitations
 -----------
 
 - Imported classes are currently not handled correctly if read from doc comment
-  (use-Statement is not evaluated) which affects return values and property types
+  (use-Statement is not fully evaluated) which affects return values and property
+  types. `use Namespace\B` will be evaluated and expanded but `use Namespace B as C`
+  is not yet de-aliased.

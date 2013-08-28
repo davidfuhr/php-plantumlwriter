@@ -97,7 +97,11 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
         $returnType = '';
         preg_match('/\*\h+@return\h+([^\h]+)/', (string) $method->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $returnType = ': ' . $this->formatClassName($matches[1]);
+            $returnType = $matches[1];
+            if ($method->getDeclaringClass()) {
+                $returnType = $this->expandNamespaceAlias($method->getDeclaringClass(), $returnType);
+            }
+            $returnType = ': ' . $this->formatClassName($returnType);
         }
         return $returnType;
     }

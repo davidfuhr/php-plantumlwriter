@@ -53,7 +53,11 @@ class PropertyWriter extends WriterAbstract
         $type = '';
         preg_match('/\*\h+@var\h+([^\h]+)/', (string) $property->getDocComment(), $matches);
         if (isset($matches[1])) {
-            $type = ': ' . $this->formatClassName($matches[1]);
+            $type = $matches[1];
+            if ($property->getDeclaringClass()) {
+                $type = $this->expandNamespaceAlias($property->getDeclaringClass(), $type);
+            }
+            $type = ': ' . $this->formatClassName($type);
         }
         return $type;
     }
