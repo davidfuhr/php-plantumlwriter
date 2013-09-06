@@ -50,10 +50,17 @@ Or multiple files or directories:
 
     php bin/console.php write path/to/ClassOne.php path/to/ClassTwo.php path/to/directory
 
-Limitations
------------
+Known Issues
+------------
 
 - Imported classes are currently not handled correctly if read from doc comment
   (use-Statement is not fully evaluated) which affects return values and property
   types. `use Namespace\B` will be evaluated and expanded but `use Namespace B as C`
   is not yet de-aliased.
+
+Future Plans
+------------
+
+- Add support for class relations, maybe with quantifiers. This could be parsed from
+  the doc comments. We could also guess the foreign quantifier (`@var OtherClass` as
+  "*..1" and `@var OtherClass[]` as "*..*"), but we can't determine our quantifier.
