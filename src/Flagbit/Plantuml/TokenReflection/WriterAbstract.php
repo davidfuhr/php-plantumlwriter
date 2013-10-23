@@ -72,6 +72,13 @@ abstract class WriterAbstract
         if (is_null($value)) {
             $value = 'null';
         }
+        else if (is_array($value)) {
+            $formattedValues = array();
+            foreach ($value as $currentValue) {
+                $formattedValues[] = $this->formatValue($currentValue);
+            }
+            $value = '[' .implode(', ', $formattedValues) . ']';
+        }
         else {
             // make sure we receive two backslashes in the output as
             // plantuml needs them escaped as well
