@@ -1,7 +1,7 @@
 php-plantumlwriter [![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter)
 ==================
 
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/big.png)](https://insight.sensiolabs.com/account/widget?project=ec51fd8d-6505-45ec-af41-7cb70ce1d89c)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/big.png)](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c)
 
 Description
 -----------
