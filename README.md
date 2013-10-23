@@ -66,3 +66,8 @@ Future Plans
   "*..1" and `@var OtherClass[]` as "*..*"), but we can't determine our quantifier.
 - Evaluate Implementation of Visitor Pattern
 - Implement own set of Interfaces
+
+Alternatives
+------------
+
+- http://westhoffswelt.de/projects/phuml.html
