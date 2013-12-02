@@ -55,8 +55,12 @@ Known Issues
 
 - Imported classes are currently not handled correctly if read from doc comment
   (use-Statement is not fully evaluated) which affects return values and property
-  types. `use Namespace\B` will be evaluated and expanded but `use Namespace B as C`
+  types. `use Namespace\B` will be evaluated and expanded but `use Namespace\B as C`
   is not yet de-aliased.
+- Constants appear twice if the are defined in the parent class and in the current
+  class.
+- Inherited methods and properties appear on each extending class. This is an
+  issue on large diagrams.
 
 Future Plans
 ------------
