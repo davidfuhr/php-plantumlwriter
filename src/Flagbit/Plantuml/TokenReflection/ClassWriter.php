@@ -52,11 +52,16 @@ class ClassWriter extends WriterAbstract
 
     /**
      * @param \TokenReflection\IReflectionClass $class
+     *
      * @return string
      */
     public function writeElement(IReflectionClass $class)
     {
-        $classString = $this->formatLine($this->writeAbstract($class) . 'class ' . $this->formatClassName($class->getName()) . ' {');
+        $classString = $this->formatLine(
+            $this->writeAbstract($class) . $this->writeObjectType($class) . ' ' . $this->formatClassName(
+                $class->getName()
+            ) . ' {'
+        );
 
         if ($this->constantWriter) {
             $classString .= $this->constantWriter->writeElements($class->getConstantReflections());
@@ -73,7 +78,12 @@ class ClassWriter extends WriterAbstract
         $classString .= $this->formatLine('}');
 
         if ($class->getParentClassName()) {
-            $classString .= $this->formatLine('class ' . $this->formatClassName($class->getName()) . ' extends ' . $this->formatClassName($class->getParentClassName()));
+            $classString .= $this->formatLine(
+                $this->writeObjectType($class) . ' ' . $this->formatClassName($class->getName()) . ' extends '
+                . $this->formatClassName(
+                    $class->getParentClassName()
+                )
+            );
         }
 
         if ($interfaceNames = $class->getInterfaceNames()) {
@@ -82,7 +92,12 @@ class ClassWriter extends WriterAbstract
             }
 
             foreach ($interfaceNames as $interfaceName) {
-                $classString .= $this->formatLine('class ' . $this->formatClassName($class->getName()) . ' implements ' . $this->formatClassName($interfaceName));
+                $classString .= $this->formatLine(
+                    $this->writeObjectType($class) . ' ' . $this->formatClassName($class->getName()) . ' implements '
+                    . $this->formatClassName(
+                        $interfaceName
+                    )
+                );
             }
         }
 
@@ -91,13 +106,28 @@ class ClassWriter extends WriterAbstract
 
     /**
      * @param IReflectionClass $class
+     *
      * @return string
      */
     private function writeAbstract(IReflectionClass $class)
     {
         $return = '';
-        if (true === $class->isAbstract()) {
+        if (true === $class->isAbstract() && false === $class->isInterface()) {
             $return = 'abstract ';
+        }
+        return $return;
+    }
+
+    /**
+     * @param IReflectionClass $class
+     *
+     * @return string
+     */
+    private function writeObjectType(IReflectionClass $class)
+    {
+        $return = 'class';
+        if (true === $class->isInterface()) {
+            $return = 'interface';
         }
         return $return;
     }

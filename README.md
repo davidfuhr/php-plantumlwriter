@@ -61,6 +61,8 @@ Known Issues
   class.
 - Inherited methods and properties appear on each extending class. This is an
   issue on large diagrams.
+- Indirectly inherited interfaces appear twice. If `A implements B` and `B implements C`
+  `C` is shown as a direct relation to `A`.
 
 Future Plans
 ------------

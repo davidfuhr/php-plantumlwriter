@@ -42,6 +42,36 @@ class ClassWriterTest extends \PHPUnit_Framework_TestCase
             ->method('isAbstract')
             ->will($this->returnValue(true));
 
+        $classMock->expects($this->atLeastOnce())
+            ->method('isInterface')
+            ->will($this->returnValue(false));
+
         $this->assertEquals("abstract class MyClassName {\n}\n", $this->classWriter->writeElement($classMock));
+    }
+
+    public function testWriteInterfaceClassName()
+    {
+        $classMock = $this->getClassMock();
+
+        $classMock->expects($this->atLeastOnce())
+            ->method('isInterface')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals("interface MyClassName {\n}\n", $this->classWriter->writeElement($classMock));
+    }
+
+    public function testWriteInterfaceNotAbstractClassName()
+    {
+        $classMock = $this->getClassMock();
+
+        $classMock->expects($this->atLeastOnce())
+            ->method('isAbstract')
+            ->will($this->returnValue(true));
+
+        $classMock->expects($this->atLeastOnce())
+            ->method('isInterface')
+            ->will($this->returnValue(true));
+
+        $this->assertEquals("interface MyClassName {\n}\n", $this->classWriter->writeElement($classMock));
     }
 }
