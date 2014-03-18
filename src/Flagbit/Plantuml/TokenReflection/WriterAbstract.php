@@ -56,7 +56,7 @@ abstract class WriterAbstract
      */
     protected function formatClassName($className)
     {
-        $className = str_replace('\\', '.', trim($className));
+        $className = str_replace('\\', '\\\\', trim($className));
         if ('.' === $className[0]) {
             $className = substr($className, 1);
         }

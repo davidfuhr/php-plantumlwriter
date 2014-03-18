@@ -58,9 +58,11 @@ class ClassWriter extends WriterAbstract
     public function writeElement(IReflectionClass $class)
     {
         $classString = $this->formatLine(
-            $this->writeAbstract($class) . $this->writeObjectType($class) . ' ' . $this->formatClassName(
+            sprintf('%s "%s"',
+            $this->writeAbstract($class) . $this->writeObjectType($class),
+            $this->formatClassName(
                 $class->getName()
-            ) . ' {'
+            )) . ' {'
         );
 
         if ($this->constantWriter) {
@@ -79,11 +81,12 @@ class ClassWriter extends WriterAbstract
 
         if ($class->getParentClassName()) {
             $classString .= $this->formatLine(
-                $this->writeObjectType($class) . ' ' . $this->formatClassName($class->getName()) . ' extends '
-                . $this->formatClassName(
+                sprintf('"%s" <|-- "%s"',
+                $this->formatClassName(
                     $class->getParentClassName()
-                )
-            );
+                ),
+                $this->formatClassName($class->getName())
+            ));
         }
 
         if ($interfaceNames = $class->getInterfaceNames()) {
@@ -93,11 +96,12 @@ class ClassWriter extends WriterAbstract
 
             foreach ($interfaceNames as $interfaceName) {
                 $classString .= $this->formatLine(
-                    $this->writeObjectType($class) . ' ' . $this->formatClassName($class->getName()) . ' implements '
-                    . $this->formatClassName(
+                    sprintf('"%s" <|.. "%s"',
+                    $this->formatClassName(
                         $interfaceName
-                    )
-                );
+                    ),
+                    $this->formatClassName($class->getName())
+                ));
             }
         }
 
