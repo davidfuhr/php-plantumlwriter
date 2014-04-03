@@ -70,6 +70,7 @@ Future Plans
 - Add support for class relations, maybe with quantifiers. This could be parsed from
   the doc comments. We could also guess the foreign quantifier (`@var OtherClass` as
   "*..1" and `@var OtherClass[]` as "*..*"), but we can't determine our quantifier.
+  If doctrine annotations are present we can use them.
 - Evaluate Implementation of Visitor Pattern
 - Implement own set of Interfaces
 
