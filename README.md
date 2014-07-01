@@ -24,7 +24,7 @@ Usage
 
 To generate the PlantUML code for `WriteCommand.php` run
 
-    php bin/console.php write src/Flagbit/Plantuml/Command/WriteCommand.php
+    php bin/php-plantumlwriter write src/Flagbit/Plantuml/Command/WriteCommand.php
 
 which will output
 
@@ -38,17 +38,17 @@ which will output
 
 If you have a large class with lots of methods you can suppress method printing using the `--without-methods` flag:
 
-    php bin/console.php write --without-methods path/to/your/LargeClass.php
+    php bin/php-plantumlwriter write --without-methods path/to/your/LargeClass.php
 
 Other available options are `--without-properties` and `--without-constants`.
 
 You can also generate a whole directory at once:
 
-    php bin/console.php write path/to/directory
+    php bin/php-plantumlwriter write path/to/directory
 
 Or multiple files or directories:
 
-    php bin/console.php write path/to/ClassOne.php path/to/ClassTwo.php path/to/directory
+    php bin/php-plantumlwriter write path/to/ClassOne.php path/to/ClassTwo.php path/to/directory
 
 Known Issues
 ------------
