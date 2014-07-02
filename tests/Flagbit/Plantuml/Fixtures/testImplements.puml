@@ -1,7 +1,13 @@
 @startuml
 interface OneInterface {
 }
+interface TwoInterface {
+}
+interface TwoInterface implements OneInterface
+class OneClass {
+}
+class OneClass implements OneInterface
 class TwoClass {
 }
-class TwoClass implements OneInterface
+class TwoClass implements TwoInterface
 @enduml

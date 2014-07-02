@@ -65,8 +65,6 @@ Known Issues
   (use-Statement is not fully evaluated) which affects return values and property
   types. `use Namespace\B` will be evaluated and expanded but `use Namespace\B as C`
   is not yet de-aliased.
-- Indirectly inherited interfaces appear twice. If `A implements B` and `B implements C`
-  `C` is shown as a direct relation to `A`.
 - The Namespace Seperator is "." and not "\".
 
 Future Plans

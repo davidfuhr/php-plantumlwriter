@@ -1,7 +1,17 @@
 <?php
 
-interface OneInterface {
+interface OneInterface
+{
 }
 
-class TwoClass implements OneInterface {
+interface TwoInterface extends OneInterface
+{
+}
+
+class OneClass implements OneInterface
+{
+}
+
+class TwoClass implements TwoInterface
+{
 }
