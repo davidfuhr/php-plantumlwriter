@@ -7,6 +7,6 @@ h2. Examples
 
 
 
-"(lightbox-toggle)!(img-responsive)/img/WriteCommand.png(WriteCommand)!":/img/WriteCommand.png
+"(lightbox-toggle)!(img-responsive)img/WriteCommand.png(WriteCommand)!":img/WriteCommand.png
 
-"(lightbox-toggle)!(img-responsive)/img/TokenReflection.png(TokenReflection)!":/img/TokenReflection.png
+"(lightbox-toggle)!(img-responsive)img/TokenReflection.png(TokenReflection)!":img/TokenReflection.png
