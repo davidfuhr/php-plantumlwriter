@@ -1,8 +1,0 @@
-@startuml
-class OneClass {
-    +oneMethod()
-    -threeMethod()
-    #twoMethod()
-    +zeroMethod()
-}
-@enduml

@@ -115,7 +115,7 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
  * @param string $someParameter
  */'));
 
-        $this->assertContains('(someParameter: string)', $this->methodWriter->writeElement($methodMock));
+        $this->assertContains('(someParameter : string)', $this->methodWriter->writeElement($methodMock));
     }
 
     public function testWriteParameterDefaultValue()
@@ -144,7 +144,7 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
  * @return string
  */'));
 
-        $this->assertStringEndsWith(": string\n", $this->methodWriter->writeElement($methodMock));
+        $this->assertStringEndsWith(" : string\n", $this->methodWriter->writeElement($methodMock));
     }
 
     public function testWriteNamespacedClassReturnValue()
@@ -156,6 +156,6 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
  * @return \\Flagbit\\TestClass
  */'));
 
-        $this->assertStringEndsWith(": Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
+        $this->assertStringEndsWith(" : Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
 }

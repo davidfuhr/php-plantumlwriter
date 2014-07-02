@@ -72,12 +72,12 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
         $parameterString = $parameter->getName();
 
         if ($parameter->getClassName()) {
-            $parameterString .= ': ' . $this->formatClassName($parameter->getClassName());
+            $parameterString .= ' : ' . $this->formatClassName($parameter->getClassName());
         }
         else {
             preg_match('/\*\h+@param\h+([^\h]+)\h+\$' . preg_quote($parameterString). '\s/', (string) $method->getDocComment(), $matches);
             if (isset($matches[1])) {
-                $parameterString .= ': ' . $this->formatClassName($matches[1]);
+                $parameterString .= ' : ' . $this->formatClassName($matches[1]);
             }
         }
 
@@ -101,7 +101,7 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
             if ($method->getDeclaringClass()) {
                 $returnType = $this->expandNamespaceAlias($method->getDeclaringClass(), $returnType);
             }
-            $returnType = ': ' . $this->formatClassName($returnType);
+            $returnType = ' : ' . $this->formatClassName($returnType);
         }
         return $returnType;
     }
