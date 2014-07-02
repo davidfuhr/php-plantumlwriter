@@ -98,6 +98,6 @@ class PropertyWriterTest extends \PHPUnit_Framework_TestCase
  * @var \\Flagbit\\TestClass
  */'));
 
-        $this->assertStringEndsWith(": Flagbit.TestClass\n", $this->propertyWriter->writeElement($propertyMock));
+        $this->assertStringEndsWith(": Flagbit\\\\TestClass\n", $this->propertyWriter->writeElement($propertyMock));
     }
 }
