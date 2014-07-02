@@ -35,13 +35,13 @@ class ConstantWriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteElement()
     {
-        $this->assertEquals("    +{static}MY_CONSTANT_NAME=somevalue\n", $this->constantWriter->writeElement($this->getConstanctMock()));
+        $this->assertEquals("    +{static}MY_CONSTANT_NAME = \"somevalue\"\n", $this->constantWriter->writeElement($this->getConstanctMock()));
     }
 
     public function testWriteElements()
     {
         $this->assertEquals(
-            "    +{static}MY_CONSTANT_NAME=somevalue\n    +{static}MY_CONSTANT_NAME=somevalue\n    +{static}MY_CONSTANT_NAME=somevalue\n",
+            "    +{static}MY_CONSTANT_NAME = \"somevalue\"\n    +{static}MY_CONSTANT_NAME = \"somevalue\"\n    +{static}MY_CONSTANT_NAME = \"somevalue\"\n",
             $this->constantWriter->writeElements(array($this->getConstanctMock(), $this->getConstanctMock(), $this->getConstanctMock()))
         );
     }

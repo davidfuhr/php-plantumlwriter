@@ -1,0 +1,23 @@
+@startuml
+class OneClass {
+    +{static}CR_CONSTANT = "\\r"
+    +{static}FLOAT_CONSTANT = 7654.321
+    +{static}INTEGER_CONSTANT = 7654
+    +{static}LF_CONSTANT = "\\n"
+    +{static}STRING_CONSTANT = "string"
+    +{static}TAB_CONSTANT = "\\t"
+    +CR_STATIC = "\\r"
+    +FLOAT_STATIC = 7654.321
+    +INTEGER_STATIC = 7654
+    +LF_STATIC = "\\n"
+    +NOVALUE_STATIC
+    -PRIVATE_STATIC
+    #PROTECTED_STATIC
+    +PUBLIC_STATIC
+    +STRING_STATIC = "string"
+    +TAB_STATIC = "\\t"
+    -{static}staticPrivate()
+    #{static}staticProtected()
+    +{static}staticPublic()
+}
+@enduml
