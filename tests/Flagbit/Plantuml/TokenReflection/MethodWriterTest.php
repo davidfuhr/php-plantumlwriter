@@ -156,6 +156,6 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
  * @return \\Flagbit\\TestClass
  */'));
 
-        $this->assertStringEndsWith(" : Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
+        $this->assertStringEndsWith(" : Flagbit\\\\TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
 }
