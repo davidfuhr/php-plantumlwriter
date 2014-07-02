@@ -24,7 +24,7 @@ Usage
 
 To generate the PlantUML code for `WriteCommand.php` run
 
-    php bin/php-plantumlwriter write src/Flagbit/Plantuml/Command/WriteCommand.php
+    php bin/php-plantumlwriter write src/Flagbit/Plantuml/Command/WriteCommand.php > WriteCommand.puml
 
 which will output
 
@@ -35,6 +35,14 @@ which will output
     }
     class Flagbit.Plantuml.Command.WriteCommand extends Symfony.Component.Console.Command.Command
     @enduml
+
+Download the `plantuml.jar` from http://plantuml.sourceforge.net/. Now you can convert your `puml` file to a `png` file.:
+
+    java -jar plantuml.jar WriteCommand.puml
+
+The resulting png should look like this:
+
+![WriteCommand Class Diagram](http://davidfuhr.github.io/php-plantumlwriter/img/WriteCommand.png)
 
 If you have a large class with lots of methods you can suppress method printing using the `--without-methods` flag:
 
@@ -63,6 +71,7 @@ Known Issues
   issue on large diagrams.
 - Indirectly inherited interfaces appear twice. If `A implements B` and `B implements C`
   `C` is shown as a direct relation to `A`.
+- The Namespace Seperator is "." and not "\".
 
 Future Plans
 ------------
