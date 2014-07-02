@@ -19,6 +19,18 @@ Currently the following language features are supported:
 - Implemented interfaces and parent classes
 - Abstract classes
 
+Requirements
+------------
+
+To generate the PlantUML code a decent version of PHP will suffice. And you need Composer to install the dependencies:
+
+- Composer (http://getcomposer.org/)
+
+But for image generation you need:
+
+- Java Runtime
+- `plantuml.jar` (http://plantuml.sourceforge.net/)
+
 Usage
 -----
 
@@ -36,7 +48,7 @@ which will output
     class Flagbit.Plantuml.Command.WriteCommand extends Symfony.Component.Console.Command.Command
     @enduml
 
-Download the `plantuml.jar` from http://plantuml.sourceforge.net/. Now you can convert your `puml` file to a `png` file.:
+Now you can convert your `puml` file to a `png` file.:
 
     java -jar plantuml.jar WriteCommand.puml
 
