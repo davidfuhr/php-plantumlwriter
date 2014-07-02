@@ -1,0 +1,10 @@
+@startuml
+class ParentClass {
+    +methodToOverride()
+    +someParentMethod()
+}
+class ExtendingClass {
+    +methodToOverride()
+}
+class ExtendingClass extends ParentClass
+@enduml

@@ -83,11 +83,11 @@ class ClassWriter extends WriterAbstract
         }
 
         if ($this->propertyWriter) {
-            $classString .= $this->propertyWriter->writeElements($class->getProperties());
+            $classString .= $this->propertyWriter->writeElements($class->getOwnProperties());
         }
 
         if ($this->methodWriter) {
-            $classString .= $this->methodWriter->writeElements($class->getMethods());
+            $classString .= $this->methodWriter->writeElements($class->getOwnMethods());
         }
 
         $classString .= $this->formatLine('}');
