@@ -65,8 +65,6 @@ Known Issues
   (use-Statement is not fully evaluated) which affects return values and property
   types. `use Namespace\B` will be evaluated and expanded but `use Namespace\B as C`
   is not yet de-aliased.
-- Constants appear twice if the are defined in the parent class and in the current
-  class.
 - Inherited methods and properties appear on each extending class. This is an
   issue on large diagrams.
 - Indirectly inherited interfaces appear twice. If `A implements B` and `B implements C`

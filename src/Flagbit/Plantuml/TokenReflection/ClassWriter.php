@@ -64,7 +64,22 @@ class ClassWriter extends WriterAbstract
         );
 
         if ($this->constantWriter) {
-            $classString .= $this->constantWriter->writeElements($class->getConstantReflections());
+            $constantReflections = $class->getOwnConstantReflections();
+            foreach ($class->getConstantReflections() as $otherConstantReflection) {
+                /* @var $otherConstantReflection \TokenReflection\ReflectionConstant */
+                $otherConstantName = $otherConstantReflection->getName();
+
+                foreach ($constantReflections as $constantReflection) {
+                    if ($constantReflection->getName() === $otherConstantName) {
+                        // skip constants already defined in our current class
+                        continue 2;
+                    }
+                }
+
+                $constantReflections[] = $otherConstantReflection;
+            }
+
+            $classString .= $this->constantWriter->writeElements($constantReflections);
         }
 
         if ($this->propertyWriter) {

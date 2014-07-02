@@ -1,0 +1,11 @@
+@startuml
+class ParentClass {
+    +{static}INHERIT_CONSTANT = true
+    +{static}PARENT_CONSTANT = true
+}
+class ExtendingClass {
+    +{static}INHERIT_CONSTANT = true
+    +{static}PARENT_CONSTANT = false
+}
+class ExtendingClass extends ParentClass
+@enduml
