@@ -1,0 +1,9 @@
+@startuml
+class OneClass {
+    #arrayProperty : array = ["foo", 1, []]
+    +booleanProperty : bool = true
+    +floatProperty : float = 654.123
+    #intProperty : int = 654
+    -stringProperty : string = "string"
+}
+@enduml

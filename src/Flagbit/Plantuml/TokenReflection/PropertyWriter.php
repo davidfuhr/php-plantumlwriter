@@ -57,7 +57,7 @@ class PropertyWriter extends WriterAbstract
             if ($property->getDeclaringClass()) {
                 $type = $this->expandNamespaceAlias($property->getDeclaringClass(), $type);
             }
-            $type = ': ' . $this->formatClassName($type);
+            $type = ' : ' . $this->formatClassName($type);
         }
         return $type;
     }

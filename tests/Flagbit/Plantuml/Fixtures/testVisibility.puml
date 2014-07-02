@@ -1,9 +1,5 @@
 @startuml
 class OneClass {
-    +oneProperty
-    -threeProperty
-    #twoProperty
-    +zeroProperty
     +oneMethod()
     -threeMethod()
     #twoMethod()

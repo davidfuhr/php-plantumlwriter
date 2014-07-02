@@ -2,11 +2,6 @@
 
 class OneClass
 {
-    var $zeroProperty;
-    public $oneProperty;
-    protected $twoProperty;
-    private $threeProperty;
-
     function zeroMethod()
     {
     }

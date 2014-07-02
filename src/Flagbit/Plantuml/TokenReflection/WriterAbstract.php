@@ -82,6 +82,9 @@ abstract class WriterAbstract
         else if (is_numeric($value)) {
             // nothing to do here
         }
+        else if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
         else {
             // make sure we receive two backslashes in the output as
             // plantuml needs them escaped as well
