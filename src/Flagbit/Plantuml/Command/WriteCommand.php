@@ -2,6 +2,7 @@
 
 namespace Flagbit\Plantuml\Command;
 
+use Flagbit\Plantuml\TokenReflection\RelationWriter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,7 +21,8 @@ class WriteCommand extends Command
             )
             ->addOption('without-constants', null, null, 'Disables rendering of constants')
             ->addOption('without-methods', null, null, 'Disables rendering of methods')
-            ->addOption('without-properties', null, null, 'Disables rendering of properties');
+            ->addOption('without-properties', null, null, 'Disables rendering of properties')
+            ->addOption('with-relations', null, null, 'Enables rendering of relations');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -45,6 +47,9 @@ class WriteCommand extends Command
         }
         if (!$input->getOption('without-methods')) {
             $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter());
+        }
+        if ($input->getOption('with-relations') || $input->getParameterOption('with-relations')) {
+            $classWriter->setRelationWriter(new RelationWriter());
         }
 
         $output->write('@startuml', "\n");

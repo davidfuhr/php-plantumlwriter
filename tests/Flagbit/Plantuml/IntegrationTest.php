@@ -20,12 +20,18 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
      */
     public function testIntegration($phpFile, $pumlCode)
     {
-        $input = new ArrayInput(array(
-            'files' => array($phpFile),
-        ));
+        $command = new WriteCommand();
+
+        $input = new ArrayInput(
+            array(
+                'with-relations',
+                'files' => array($phpFile),
+            ),
+            $command->getDefinition()
+        );
+
         $output = new BufferedOutput();
 
-        $command = new WriteCommand();
         $command->run($input, $output);
 
         $this->assertEquals($pumlCode, $output->fetch());

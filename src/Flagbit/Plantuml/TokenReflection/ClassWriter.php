@@ -7,19 +7,24 @@ use TokenReflection\IReflectionClass;
 class ClassWriter extends WriterAbstract
 {
     /**
-     * @var \Flagbit\Plantuml\TokenReflection\ConstantWriter
+     * @var ConstantWriter
      */
     private $constantWriter;
 
     /**
-     * @var \Flagbit\Plantuml\TokenReflection\PropertyWriter
+     * @var PropertyWriter
      */
     private $propertyWriter;
 
     /**
-     * @var \Flagbit\Plantuml\TokenReflection\MethodWriter
+     * @var MethodWriter
      */
     private $methodWriter;
+
+    /**
+     * @var RelationWriter
+     */
+    private $relationWriter;
 
     public function __construct()
     {
@@ -27,27 +32,35 @@ class ClassWriter extends WriterAbstract
     }
 
     /**
-     * @param \Flagbit\Plantuml\TokenReflection\ConstantWriter $constantWriter
+     * @param ConstantWriter $constantWriter
      */
-    public function setConstantWriter($constantWriter)
+    public function setConstantWriter(ConstantWriter $constantWriter)
     {
         $this->constantWriter = $constantWriter;
     }
 
     /**
-     * @param \Flagbit\Plantuml\TokenReflection\MethodWriter $methodWriter
+     * @param MethodWriter $methodWriter
      */
-    public function setMethodWriter($methodWriter)
+    public function setMethodWriter(MethodWriter $methodWriter)
     {
         $this->methodWriter = $methodWriter;
     }
 
     /**
-     * @param \Flagbit\Plantuml\TokenReflection\PropertyWriter $propertyWriter
+     * @param PropertyWriter $propertyWriter
      */
-    public function setPropertyWriter($propertyWriter)
+    public function setPropertyWriter(PropertyWriter $propertyWriter)
     {
         $this->propertyWriter = $propertyWriter;
+    }
+
+    /**
+     * @param RelationWriter $relationWriter
+     */
+    public function setRelationWriter(RelationWriter $relationWriter)
+    {
+        $this->relationWriter = $relationWriter;
     }
 
     /**
@@ -110,6 +123,10 @@ class ClassWriter extends WriterAbstract
                     )
                 );
             }
+        }
+
+        if ($this->relationWriter) {
+            $classString .= $this->relationWriter->writeElement($class);
         }
 
         return $classString;

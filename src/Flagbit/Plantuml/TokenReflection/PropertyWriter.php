@@ -34,6 +34,7 @@ class PropertyWriter extends WriterAbstract
             /** @var $property IReflectionProperty */
             $propertiesString .= $this->writeElement($property);
         }
+
         return $propertiesString;
     }
 

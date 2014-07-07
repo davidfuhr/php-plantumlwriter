@@ -1,0 +1,10 @@
+@startuml
+class Relatives.ChildPerson {
+    -father : ParentPerson
+    -mother : ParentPerson
+}
+Relatives.ChildPerson "?" --> "1" Relatives.ParentPerson: "mother"
+Relatives.ChildPerson "?" --> "1" Relatives.ParentPerson: "father"
+class Relatives.ParentPerson {
+}
+@enduml
