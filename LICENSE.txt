@@ -1,4 +1,4 @@
-Copyright (c) 2013, David Fuhr
+Copyright (c) 2013-2014, David Fuhr
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
