@@ -7,7 +7,8 @@ use TokenReflection\IReflectionProperty;
 class PropertyWriter extends WriterAbstract
 {
     /**
-     * @param \TokenReflection\IReflectionProperty $property
+     * @param IReflectionProperty $property
+     *
      * @return string
      */
     public function writeElement(IReflectionProperty $property)
@@ -17,26 +18,28 @@ class PropertyWriter extends WriterAbstract
     }
 
     /**
-     * @param $properties
+     * @param IReflectionProperty[] $properties
+     *
      * @return string
      */
     public function writeElements(array $properties)
     {
         // see https://bugs.php.net/bug.php?id=50688
-        @usort($properties, function($a, $b) {
+        @usort($properties, function(IReflectionProperty $a, IReflectionProperty $b) {
             return strnatcasecmp($a->getName(), $b->getName());
         });
 
         $propertiesString = '';
         foreach ($properties as $property) {
-            /** @var $property \TokenReflection\IReflectionProperty */
+            /** @var $property IReflectionProperty */
             $propertiesString .= $this->writeElement($property);
         }
         return $propertiesString;
     }
 
     /**
-     * @param \TokenReflection\IReflectionProperty $property
+     * @param IReflectionProperty $property
+     *
      * @return string
      */
     public function writeVisibility(IReflectionProperty $property)
@@ -45,7 +48,8 @@ class PropertyWriter extends WriterAbstract
     }
 
     /**
-     * @param \TokenReflection\IReflectionProperty $property
+     * @param IReflectionProperty $property
+     *
      * @return string
      */
     public function writeType(IReflectionProperty $property)
@@ -64,6 +68,7 @@ class PropertyWriter extends WriterAbstract
 
     /**
      * @param IReflectionProperty $property
+     *
      * @return string
      */
     public function writeValue(IReflectionProperty $property)
