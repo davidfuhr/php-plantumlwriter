@@ -78,7 +78,7 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
             }
         }
 
-        if ($parameter->isDefaultValueAvailable()) {
+        if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
             $parameterString .= ' = ' . $this->formatValue($parameter->getDefaultValue());
         }
 
