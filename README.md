@@ -78,6 +78,7 @@ Known Issues
   types. `use Namespace\B` will be evaluated and expanded but `use Namespace\B as C`
   is not yet de-aliased.
 - The Namespace Seperator is "." and not "\".
+- Traits are not yet supported. See #4
 
 Future Plans
 ------------
