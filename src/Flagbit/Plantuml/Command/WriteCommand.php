@@ -20,7 +20,8 @@ class WriteCommand extends Command
             )
             ->addOption('without-constants', null, null, 'Disables rendering of constants')
             ->addOption('without-methods', null, null, 'Disables rendering of methods')
-            ->addOption('without-properties', null, null, 'Disables rendering of properties');
+            ->addOption('without-properties', null, null, 'Disables rendering of properties')
+            ->addOption('without-doc-content', null, null, 'Disables parsing doc block for methods or properties');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -45,6 +46,9 @@ class WriteCommand extends Command
         }
         if (!$input->getOption('without-methods')) {
             $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter());
+        }
+        if (!$input->getOption('without-doc-content')) {
+            $classWriter->setDocContentWriter(new \Flagbit\Plantuml\TokenReflection\DocContentWriter());
         }
 
         $output->write('@startuml', "\n");
