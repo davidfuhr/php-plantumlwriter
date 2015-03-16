@@ -4,7 +4,8 @@
 
 ### Added
 
-- Adds type hints for callbacks
+- Add type hints for callbacks
+- Add support for doc block methods and properties ([bravoman](https://github.com/bravoman))
 
 ### Changed
 

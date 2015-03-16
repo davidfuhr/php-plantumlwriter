@@ -21,6 +21,11 @@ class ClassWriter extends WriterAbstract
      */
     private $methodWriter;
 
+    /**
+     * @var \Flagbit\Plantuml\TokenReflection\DocContentWriter
+     */
+    private $docContentWriter;
+
     public function __construct()
     {
         $this->setIndent('');
@@ -48,6 +53,14 @@ class ClassWriter extends WriterAbstract
     public function setPropertyWriter($propertyWriter)
     {
         $this->propertyWriter = $propertyWriter;
+    }
+
+    /**
+     * @param \Flagbit\Plantuml\TokenReflection\DocContentWriter $docContentWriter
+     */
+    public function setDocContentWriter($docContentWriter)
+    {
+        $this->docContentWriter = $docContentWriter;
     }
 
     /**
@@ -84,10 +97,16 @@ class ClassWriter extends WriterAbstract
 
         if ($this->propertyWriter) {
             $classString .= $this->propertyWriter->writeElements($class->getOwnProperties());
+            if($this->docContentWriter) {
+                $classString .= $this->docContentWriter->writeProperties($class);
+            }
         }
 
         if ($this->methodWriter) {
             $classString .= $this->methodWriter->writeElements($class->getOwnMethods());
+            if($this->docContentWriter) {
+                $classString .= $this->docContentWriter->writeMethods($class);
+            }
         }
 
         $classString .= $this->formatLine('}');
