@@ -1,4 +1,4 @@
-php-plantumlwriter [![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/mini.png)](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c)
+php-plantumlwriter [![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/mini.png)](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c) [![License](https://poser.pugx.org/davidfuhr/php-plantumlwriter/license.svg)](https://packagist.org/packages/davidfuhr/php-plantumlwriter)
 ==================
 
 Description
@@ -78,6 +78,7 @@ Known Issues
   types. `use Namespace\B` will be evaluated and expanded but `use Namespace\B as C`
   is not yet de-aliased.
 - The Namespace Seperator is "." and not "\".
+- Traits are not yet supported. See [#4](https://github.com/davidfuhr/php-plantumlwriter/issues/4)
 
 Future Plans
 ------------

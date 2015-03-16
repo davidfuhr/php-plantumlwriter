@@ -128,6 +128,9 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
         $parameterMock->expects($this->any())
             ->method('isDefaultValueAvailable')
             ->will($this->returnValue(true));
+        $parameterMock->expects($this->any())
+            ->method('isOptional')
+            ->will($this->returnValue(true));
 
         $this->methodParameters = array($parameterMock);
         $methodMock = $this->getMethodMock();

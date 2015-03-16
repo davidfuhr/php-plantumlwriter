@@ -19,21 +19,18 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
     }
 
     /**
-     * @param array $methods
+     * @param IReflectionMethod[] $methods
      * @return string
      */
     public function writeElements(array $methods)
     {
         // see https://bugs.php.net/bug.php?id=50688
-        @usort($methods, function($a, $b) {
-            /* @var $a \TokenReflection\IReflectionMethod */
-            /* @var $b \TokenReflection\IReflectionMethod */
+        @usort($methods, function(IReflectionMethod $a, IReflectionMethod $b) {
             return strnatcasecmp($a->getName(), $b->getName());
         });
 
         $methodsString = '';
         foreach ($methods as $method) {
-            /** @var $property \TokenReflection\IReflectionMethod */
             $methodsString .= $this->writeElement($method);
         }
         return $methodsString;
@@ -81,7 +78,7 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
             }
         }
 
-        if ($parameter->isDefaultValueAvailable()) {
+        if ($parameter->isOptional() && $parameter->isDefaultValueAvailable()) {
             $parameterString .= ' = ' . $this->formatValue($parameter->getDefaultValue());
         }
 

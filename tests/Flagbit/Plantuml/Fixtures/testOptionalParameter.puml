@@ -1,0 +1,5 @@
+@startuml
+class Foo {
+    +bar(optional, required)
+}
+@enduml
