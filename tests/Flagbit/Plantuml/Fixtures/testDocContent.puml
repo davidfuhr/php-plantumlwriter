@@ -1,0 +1,16 @@
+@startuml
+class DocContent {
+    +collidingProperty : int
+    -normalProperty : string
+    +docContentReadProperty : int
+    +docContentWriteProperty : float
+    +docContentProperty : double
+    +collidingProperty : string
+    +{static}CollidingMethodName() : int
+    #NormalMethod() : double
+    +DocContentMethod() : int
+    +DocContentMethodWithArguments(arg1 : int, arg2 : string) : float
+    +DocContentMethodWithOtherArguments(int $arg1, string $arg2) : double
+    +CollidingMethodName() : string
+}
+@enduml
