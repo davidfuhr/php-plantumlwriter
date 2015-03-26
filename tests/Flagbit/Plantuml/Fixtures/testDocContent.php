@@ -9,10 +9,10 @@
  * @property-write float $docContentWriteProperty
  * @property double $docContentProperty
  * @property string $collidingProperty
- * @method int DocContentMethod()
- * @method float DocContentMethodWithArguments(arg1 : int, arg2 : string)
- * @method double DocContentMethodWithOtherArguments(int $arg1, string $arg2)
- * @method string CollidingMethodName()
+ * @method int docContentMethod()
+ * @method float docContentMethodWithArguments(arg1 : int, arg2 : string)
+ * @method double docContentMethodWithOtherArguments(int $arg1, string $arg2)
+ * @method string collidingMethodName()
  */
 class DocContent
 {
@@ -25,14 +25,14 @@ class DocContent
     /**
      * @return double
      */
-    protected function NormalMethod() {
+    protected function normalMethod() {
 
     }
 
     /**
      * @return int
      */
-    public static function CollidingMethodName() {
+    public static function collidingMethodName() {
 
     }
 }
