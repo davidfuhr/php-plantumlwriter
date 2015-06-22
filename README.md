@@ -1,5 +1,7 @@
-php-plantumlwriter [![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/mini.png)](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c) [![License](https://poser.pugx.org/davidfuhr/php-plantumlwriter/license.svg)](https://packagist.org/packages/davidfuhr/php-plantumlwriter)
+php-plantumlwriter
 ==================
+
+[![Build Status](https://travis-ci.org/davidfuhr/php-plantumlwriter.png?branch=master)](https://travis-ci.org/davidfuhr/php-plantumlwriter) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/davidfuhr/php-plantumlwriter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/davidfuhr/php-plantumlwriter/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c/mini.png)](https://insight.sensiolabs.com/projects/ec51fd8d-6505-45ec-af41-7cb70ce1d89c) [![License](https://poser.pugx.org/davidfuhr/php-plantumlwriter/license.svg)](https://packagist.org/packages/davidfuhr/php-plantumlwriter)
 
 Description
 -----------
