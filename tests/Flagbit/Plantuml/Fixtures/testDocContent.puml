@@ -10,7 +10,7 @@ class DocContent {
     #normalMethod() : double
     +docContentMethod() : int
     +docContentMethodWithArguments(arg1 : int, arg2 : string) : float
-    +cocContentMethodWithOtherArguments(int $arg1, string $arg2) : double
+    +docContentMethodWithOtherArguments(int $arg1, string $arg2) : double
     +collidingMethodName() : string
 }
 @enduml
