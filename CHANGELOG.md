@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Unreleased
+## 1.5.0
 
 ### Added
 
@@ -11,7 +11,7 @@
 
 - Fixes an issue with optional parameters before required parameters
 
-## 1.4
+## 1.4.0
 
 ### Added
 
@@ -24,8 +24,9 @@
 - Fixes issue with inherited constants
 - Fixes issue with duplicate methods, properties and interfaces
 
-## 1.2
+## 1.2.0
 
-## 1.1
+## 1.1.0
 
-## 1.0
+## 1.0.0
+
