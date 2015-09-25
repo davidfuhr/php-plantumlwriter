@@ -33,6 +33,15 @@ But for image generation you need:
 - Java Runtime
 - `plantuml.jar` (http://plantuml.sourceforge.net/)
 
+### Phar generation
+
+php-plantumlwriter uses [Box 2 library](http://box-project.github.io/box2/) to generate a single .phar file containing everything required for the usage.
+
+To create the .phar file from sources just run:
+```
+$ box build
+```
+
 Usage
 -----
 
