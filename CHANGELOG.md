@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.6.0
+
+### Added
+
+- Add support for box to build phar ([EmanueleMinotto](https://github.com/EmanueleMinotto))
+
 ## 1.5.0
 
 ### Added
