@@ -6,6 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class WriteCommand extends Command
 {
@@ -18,6 +19,7 @@ class WriteCommand extends Command
                 'files',
                 InputArgument::IS_ARRAY
             )
+            ->addOption('filter', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Filtering pattern (if you set directories to sources)')
             ->addOption('without-constants', null, null, 'Disables rendering of constants')
             ->addOption('without-methods', null, null, 'Disables rendering of methods')
             ->addOption('without-properties', null, null, 'Disables rendering of properties')
@@ -30,7 +32,7 @@ class WriteCommand extends Command
 
         foreach ($input->getArgument('files') as $fileToProcess) {
             if (is_dir($fileToProcess)) {
-                $broker->processDirectory($fileToProcess);
+                $broker->processDirectory($fileToProcess, $input->getOption('filter'));
             }
             else {
                 $broker->processFile($fileToProcess);
