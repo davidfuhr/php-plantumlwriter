@@ -1,6 +1,5 @@
 {
     "name": "scips/php-plantumlwriter",
-    "version": "1.0.1",
     "description": "A tool to create PlantUML class diagrams from your PHP source.",
     "type": "project",
     "keywords": [
