@@ -1,0 +1,13 @@
+@startuml
+class GroupingClass {
+    -- deprecated --
+    +value : bool
+    +zeroMethod() : bool
+    -- todo --
+    -privateValue : bool
+    +oneMethod() : bool
+    ----
+    -count : int
+    +twoMethod() : bool
+}
+@enduml

@@ -161,4 +161,18 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertStringEndsWith(" : Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
+
+    public function testWriteGroupDeprecated()
+    {
+        $methodMock = $this->getMethodMock();
+        $methodMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+* @deprecated 1.1 Use oneMethod instead
+* @return bool
+*/'));
+        $output = $this->methodWriter->writeElement($methodMock);
+        $this->assertContains("--deprecated--\n", $output);
+        $this->assertStringEndsWith(" : bool\n", $output);
+    }
 }
