@@ -1,0 +1,10 @@
+@startuml
+class OneClass {
+    +objectTypeHint( #1 params )
+    +objectTypeHintAndDocComment( #1 params ) : OneClass
+    +parametersWithValues( #4 params )
+    #scalarParameters( #3 params )
+    -typeHintWinsOverDocComment( #1 params )
+    +zeroMethod() : bool
+}
+@enduml
