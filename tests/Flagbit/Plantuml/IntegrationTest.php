@@ -48,6 +48,23 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($pumlCode, $output->fetch());
     }
 
+    /**
+     * @dataProvider provideTestCasesWithoutFunctionParams
+     */
+    public function testIntegrationWithoutFunctionParams($phpFile, $pumlCode)
+    {
+        $input = new ArrayInput(array(
+            'files' => array($phpFile),
+            '--without-function-params' => true
+        ));
+        $output = new BufferedOutput();
+
+        $command = new WriteCommand();
+        $command->run($input, $output);
+
+        $this->assertEquals($pumlCode, $output->fetch());        
+    }
+
     public function provideTestCasesNoParam()
     {
         return $this->provideTestCase('/test[a-zA-Z]*\.php$/');
@@ -56,6 +73,11 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function provideTestCasesWithGroup()
     {
         return $this->provideTestCase('/test[a-zA-Z]*_with-group\.php$/');
+    }
+
+    public function provideTestCasesWithoutFunctionParams()
+    {
+        return $this->provideTestCase('/test[a-zA-Z]*_without-fct-params\.php$/');
     }
 
     private function provideTestCase($filter)

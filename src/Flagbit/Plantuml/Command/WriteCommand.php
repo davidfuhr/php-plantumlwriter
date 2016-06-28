@@ -40,6 +40,9 @@ class WriteCommand extends Command
         }
 
         $writerOptions = new \Flagbit\Plantuml\TokenReflection\WriterOptions();
+        if ($input->getOption('without-function-params')) {
+            $writerOptions->withoutFunctionParameter = true;
+        }
 
         $classWriter = new \Flagbit\Plantuml\TokenReflection\ClassWriter();
         if (!$input->getOption('without-constants')) {
@@ -54,9 +57,9 @@ class WriteCommand extends Command
         }
         if (!$input->getOption('without-methods')) {
             if ($input->getOption('grouping')) {
-                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodGroupingWriter());
+                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodGroupingWriter($writerOptions));
             } else {
-                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter());
+                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter($writerOptions));
             }
         }
         if (!$input->getOption('without-doc-content')) {
