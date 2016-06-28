@@ -13,7 +13,7 @@ class MethodGroupingWriter extends MethodWriter
      */
     public function writeElements(array $methods)
     {
-        $groups = array('other'=>[],'deprecated'=>[],'todo'=>[]);
+        $groups = array('other'=>array() ,'deprecated'=>array() ,'todo'=>array() );
         foreach ($methods as $method) {
             if($this->isTodo($method)){
                 $groups['todo'][] = $method;
