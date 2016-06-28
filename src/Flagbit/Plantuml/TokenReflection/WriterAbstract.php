@@ -6,6 +6,18 @@ use TokenReflection\IReflectionClass;
 
 abstract class WriterAbstract
 {
+
+    /**
+     * @param Flagbit\Plantuml\TokenReflection\WriterOptions $writerOptions
+     */
+    public function __construct(WriterOptions $writerOptions=null)
+    {
+        if (!is_null($writerOptions)) {
+            $this->writerOptions = $writerOptions;
+        } else {
+            $this->writerOptions = new WriterOptions();
+        }
+    }
     /**
      * @var string
      */
@@ -15,6 +27,11 @@ abstract class WriterAbstract
      * @var string
      */
     private $linebreak = "\n";
+
+    /**
+     * @var  Flagbit\Plantuml\TokenReflection\WriterOptions
+     */
+    protected $writerOptions = null;
 
     /**
      * @param string $indent

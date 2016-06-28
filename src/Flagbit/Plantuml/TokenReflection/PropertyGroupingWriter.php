@@ -12,7 +12,7 @@ class PropertyGroupingWriter extends PropertyWriter
      */
     public function writeElements(array $properties)
     {
-        $groups = array('other'=>[],'deprecated'=>[],'todo'=>[]);
+        $groups = array('other'=>array(),'deprecated'=>array(),'todo'=>array());
         foreach ($properties as $property) {
             if($this->isTodo($property)){
                 $groups['todo'][] = $property;
