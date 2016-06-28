@@ -56,6 +56,9 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
             /** @var $parameter \TokenReflection\IReflectionParameter */
             $parameters[] = $this->writeParameter($method, $parameter);
         }
+        if ($this->writerOptions->withoutFunctionParameter) {
+            return '( #' . count($parameters) . ' params )';
+        }
         return '(' . implode(', ' , $parameters) . ')';
     }
 

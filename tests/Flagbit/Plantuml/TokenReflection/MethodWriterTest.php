@@ -161,4 +161,23 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertStringEndsWith(" : Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
+
+    public function testWithoutFunctionParameter()
+    {
+        $options = new \Flagbit\Plantuml\TokenReflection\WriterOptions();
+        $options->withoutFunctionParameter = true;
+        $this->methodWriter = new \Flagbit\Plantuml\TokenReflection\MethodWriter($options);
+
+        $parameterMock = $this->getMockBuilder('\\TokenReflection\\IReflectionParameter')
+            ->getMock();
+        $parameterMock->expects($this->any())
+            ->method('getName')
+            ->will($this->returnValue('someParameter'));
+
+        $this->methodParameters = array($parameterMock);
+
+        $methodMock = $this->getMethodMock();
+
+        $this->assertContains('( #1 params )', $this->methodWriter->writeElement($methodMock));        
+    }
 }
