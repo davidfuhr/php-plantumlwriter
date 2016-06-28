@@ -22,7 +22,8 @@ class WriteCommand extends Command
             ->addOption('without-methods', null, null, 'Disables rendering of methods')
             ->addOption('without-properties', null, null, 'Disables rendering of properties')
             ->addOption('without-doc-content', null, null, 'Disables parsing doc block for methods or properties')
-            ->addOption('grouping', null, null, 'Enable deprecated and todo grouping for methods');
+            ->addOption('grouping', null, null, 'Enable deprecated and todo grouping for methods'),
+            ->addOption('without-function-params', null, null, 'Do not display function param, only count');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
