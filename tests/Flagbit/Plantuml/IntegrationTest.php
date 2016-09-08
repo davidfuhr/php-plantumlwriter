@@ -32,6 +32,23 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider provideTestCasesMaxLength
+     */
+    public function testIntegrationWithMaxLength($phpFile, $pumlCode)
+    {
+        $input = new ArrayInput(array(
+            'files' => array($phpFile),
+            '--max-length' => 40
+        ));
+        $output = new BufferedOutput();
+
+        $command = new WriteCommand();
+        $command->run($input, $output);
+
+        $this->assertEquals($pumlCode, $output->fetch());
+    }
+
+    /**
      * @dataProvider provideTestCasesWithGroup
      */
     public function testIntegrationWithGroup($phpFile, $pumlCode)
@@ -62,7 +79,7 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $command = new WriteCommand();
         $command->run($input, $output);
 
-        $this->assertEquals($pumlCode, $output->fetch());        
+        $this->assertEquals($pumlCode, $output->fetch());
     }
 
     public function provideTestCasesNoParam()
@@ -80,9 +97,13 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         return $this->provideTestCase('/test[a-zA-Z]*_without-fct-params\.php$/');
     }
 
+    public function provideTestCasesMaxLength()
+    {
+        return $this->provideTestCase('/test[a-zA-Z]*_maxlength-params\.php$/');
+    }
+
     private function provideTestCase($filter)
     {
-        print($filter);
         $fixturesDir = realpath($this->getFixturesDir());
         $tests = array();
 

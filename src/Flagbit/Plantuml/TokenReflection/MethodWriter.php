@@ -106,4 +106,18 @@ class MethodWriter extends \Flagbit\Plantuml\TokenReflection\WriterAbstract
         }
         return $returnType;
     }
+
+    /**
+     * Overide format line if needed
+     * @param  string $string
+     * @return string
+     */
+    public function formatLine($string)
+    {
+        if (isset($this->writerOptions->maxLineLength) && $this->writerOptions->maxLineLength>0) {
+            $string = substr($string, 0, $this->writerOptions->maxLineLength);
+        }
+        return parent::formatLine($string);
+    }
+
 }

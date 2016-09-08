@@ -28,7 +28,7 @@ class PropertyGroupingWriter extends PropertyWriter
         }
         if (!empty($groups['todo'])) {
             $propertiesString .= $this->formatLine($this->writeTodo());
-            $propertiesString .= parent::writeElements($groups['todo']);;        
+            $propertiesString .= parent::writeElements($groups['todo']);
         }
         if (!empty($groups['deprecated'])) {
             $propertiesString .= $this->formatLine($this->writeDeprecated());
@@ -74,7 +74,7 @@ class PropertyGroupingWriter extends PropertyWriter
     {
         return "-- todo --";
     }
-    
+
     private function writeSeparator()
     {
         return "==";
