@@ -21,7 +21,10 @@ class WriteCommand extends Command
             ->addOption('without-constants', null, null, 'Disables rendering of constants')
             ->addOption('without-methods', null, null, 'Disables rendering of methods')
             ->addOption('without-properties', null, null, 'Disables rendering of properties')
-            ->addOption('without-doc-content', null, null, 'Disables parsing doc block for methods or properties');
+            ->addOption('without-doc-content', null, null, 'Disables parsing doc block for methods or properties')
+            ->addOption('grouping', null, null, 'Enable deprecated and todo grouping for methods')
+            ->addOption('without-function-params', null, null, 'Do not display function param, only count')
+            ->addOption('max-length', null, null, 'Limit the output size of lines inside classes by truncating');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -37,15 +40,31 @@ class WriteCommand extends Command
             }
         }
 
+        $writerOptions = new \Flagbit\Plantuml\TokenReflection\WriterOptions();
+        if ($input->getOption('without-function-params')) {
+            $writerOptions->withoutFunctionParameter = true;
+        }
+        if($input->getOption('max-length')) {
+            $writerOptions->maxLineLength = $input->getOption('max-length');
+        }
+
         $classWriter = new \Flagbit\Plantuml\TokenReflection\ClassWriter();
         if (!$input->getOption('without-constants')) {
-            $classWriter->setConstantWriter(new \Flagbit\Plantuml\TokenReflection\ConstantWriter());
+            $classWriter->setConstantWriter(new \Flagbit\Plantuml\TokenReflection\ConstantWriter($writerOptions));
         }
         if (!$input->getOption('without-properties')) {
-            $classWriter->setPropertyWriter(new \Flagbit\Plantuml\TokenReflection\PropertyWriter());
+            if ($input->getOption('grouping')) {
+                $classWriter->setPropertyWriter(new \Flagbit\Plantuml\TokenReflection\PropertyGroupingWriter($writerOptions));
+            } else {
+                $classWriter->setPropertyWriter(new \Flagbit\Plantuml\TokenReflection\PropertyWriter($writerOptions));
+            }
         }
         if (!$input->getOption('without-methods')) {
-            $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter());
+            if ($input->getOption('grouping')) {
+                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodGroupingWriter($writerOptions));
+            } else {
+                $classWriter->setMethodWriter(new \Flagbit\Plantuml\TokenReflection\MethodWriter($writerOptions));
+            }
         }
         if (!$input->getOption('without-doc-content')) {
             $classWriter->setDocContentWriter(new \Flagbit\Plantuml\TokenReflection\DocContentWriter());

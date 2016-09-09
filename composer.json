@@ -1,5 +1,5 @@
 {
-    "name": "davidfuhr/php-plantumlwriter",
+    "name": "scips/php-plantumlwriter",
     "description": "A tool to create PlantUML class diagrams from your PHP source.",
     "type": "project",
     "keywords": [
@@ -11,11 +11,16 @@
             "name": "David Fuhr",
             "homepage": "http://www.davidfuhr.de",
             "role": "Developer"
-        }
+        },
+	{
+	    "name": "Sébastien Barbieri",
+	    "homepage": "http://www.sbw.be",
+	    "role": "contributor"
+	}
     ],
     "support": {
-        "issues": "https://github.com/davidfuhr/php-plantumlwriter/issues",
-        "source": "https://github.com/davidfuhr/php-plantumlwriter.git"
+        "issues": "https://github.com/scips/php-plantumlwriter/issues",
+        "source": "https://github.com/scips/php-plantumlwriter.git"
     },
     "autoload": {
         "psr-0": {

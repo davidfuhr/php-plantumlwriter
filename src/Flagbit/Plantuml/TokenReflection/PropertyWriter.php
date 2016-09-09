@@ -77,6 +77,9 @@ class PropertyWriter extends WriterAbstract
         if ($property->getDeclaringClass() && $defaultProperties = $property->getDeclaringClass()->getDefaultProperties()) {
             if (!is_null($defaultProperties[$property->getName()])) {
                $value = ' = ' . $this->formatValue($defaultProperties[$property->getName()]);
+                $maxLineLength = $this->writerOptions->maxLineLength;
+                if (!empty($maxLineLength) && $maxLineLength>0)
+                    $value = substr($value, 0, $this->writerOptions->maxLineLength+3);
             }
         }
         return $value;

@@ -13,7 +13,11 @@ class ConstantWriter extends WriterAbstract
      */
     public function writeElement(IReflectionConstant $constant)
     {
-        return $this->formatLine('+{static}' . $constant->getName() . ' = ' . $this->formatValue($constant->getValue()));
+        $value = $this->formatValue($constant->getValue());
+        $maxLineLength = $this->writerOptions->maxLineLength;
+        if (!empty($maxLineLength) && $maxLineLength>0)
+            $value = substr($value, 0, $this->writerOptions->maxLineLength);
+        return $this->formatLine('+{static}' . $constant->getName() . ' = ' . $value);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace Flagbit\Test\Plantuml\TokenReflection;
 /**
  * @covers \Flagbit\Plantuml\TokenReflection\MethodWriter
  */
-class MethodWriterTest extends \PHPUnit_Framework_TestCase
+class MethodGroupingWriterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Flagbit\Plantuml\TokenReflection\MethodWriter
@@ -16,21 +16,21 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->methodWriter = new \Flagbit\Plantuml\TokenReflection\MethodWriter();
+        $this->methodWriter = new \Flagbit\Plantuml\TokenReflection\MethodGroupingWriter();
     }
 
-    protected function getMethodMock()
+    protected function getMethodMock($methodName = null, $methodParameters = null)
     {
         $methodMock = $this->getMockBuilder('\\TokenReflection\\IReflectionMethod')
             ->getMock();
 
         $methodMock->expects($this->atLeastOnce())
             ->method('getName')
-            ->will($this->returnValue('myMethodName'));
+            ->will($this->returnValue(empty($methodName)?'myMethodName':$methodName));
 
         $methodMock->expects($this->atLeastOnce())
             ->method('getParameters')
-            ->will($this->returnValue($this->methodParameters));
+            ->will($this->returnValue(empty($methodParameters)?$this->methodParameters:$methodParameters));
 
         return $methodMock;
     }
@@ -162,22 +162,64 @@ class MethodWriterTest extends \PHPUnit_Framework_TestCase
         $this->assertStringEndsWith(" : Flagbit.TestClass\n", $this->methodWriter->writeElement($methodMock));
     }
 
-    public function testWithoutFunctionParameter()
+    public function testWriteGroupDeprecated()
     {
-        $options = new \Flagbit\Plantuml\TokenReflection\WriterOptions();
-        $options->withoutFunctionParameter = true;
-        $this->methodWriter = new \Flagbit\Plantuml\TokenReflection\MethodWriter($options);
+        $methodMock = $this->getMethodMock();
+        $methodMock->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+* @deprecated 1.1 Use oneMethod instead
+* @return bool
+*/'));
+        $output = $this->methodWriter->writeElements(array($methodMock));
+        $this->assertContains("-- deprecated --\n", $output);
+        $this->assertContains(" : bool\n", $output);
+    }
 
+    public function testWriteGroupDeprecatedMultipleMethods()
+    {
+        $methodMock1 = $this->getMethodMock();
+        $methodMock1->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @deprecated 1.1 Use oneMethod instead
+ * @return bool
+ */'));
+        $methodMock2 = $this->getMethodMock('myMethodName2');
+        $methodMock2->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @deprecated
+ * @return int
+ */'));
+        $output = $this->methodWriter->writeElements(array($methodMock1,$methodMock2));
+        $this->assertEquals("    ==\n    -- deprecated --\n    +myMethodName() : bool\n    +myMethodName2() : int\n", $output);
+    }
+
+    public function testWriteGroupTodoMultipleMethods()
+    {
+        $methodMock1 = $this->getMethodMock('aMethod');
+        $methodMock1->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @todo Use oneMethod instead
+ * @return bool
+ */'));
         $parameterMock = $this->getMockBuilder('\\TokenReflection\\IReflectionParameter')
             ->getMock();
         $parameterMock->expects($this->any())
             ->method('getName')
             ->will($this->returnValue('someParameter'));
 
-        $this->methodParameters = array($parameterMock);
-
-        $methodMock = $this->getMethodMock();
-
-        $this->assertContains('( #1 params )', $this->methodWriter->writeElement($methodMock));        
+        $methodMock2 = $this->getMethodMock('anotherMethod',array($parameterMock));
+        $methodMock2->expects($this->atLeastOnce())
+            ->method('getDocComment')
+            ->will($this->returnValue('/**
+ * @todo
+ * @param string $someParameter
+ * @return int
+ */'));
+        $output = $this->methodWriter->writeElements(array($methodMock1,$methodMock2));
+        $this->assertEquals("    ==\n    -- todo --\n    +aMethod() : bool\n    +anotherMethod(someParameter : string) : int\n", $output);
     }
 }

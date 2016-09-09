@@ -1,0 +1,6 @@
+@startuml
+class MaxLength {
+    +{static}LONG_CONSTANT = "Something that's not expected here is a
+    -longProperty : string = "Something that's not expected here is a
+}
+@enduml
