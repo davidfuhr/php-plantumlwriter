@@ -35,7 +35,7 @@ But for image generation you need:
 
 ### Phar generation
 
-php-plantumlwriter uses [Box 2 library](http://box-project.github.io/box2/) to generate a single .phar file containing everything required for the usage.
+php-plantumlwriter uses [Box 2 library](https://box-project.github.io/box2/) to generate a single .phar file containing everything required for the usage.
 
 To create the .phar file from sources just run:
 ```
@@ -65,7 +65,7 @@ Now you can convert your `puml` file to a `png` file.:
 
 The resulting png should look like this:
 
-![WriteCommand Class Diagram](http://davidfuhr.github.io/php-plantumlwriter/img/WriteCommand.png)
+![WriteCommand Class Diagram](https://davidfuhr.github.io/php-plantumlwriter/img/WriteCommand.png)
 
 If you have a large class with lots of methods you can suppress method printing using the `--without-methods` flag:
 
