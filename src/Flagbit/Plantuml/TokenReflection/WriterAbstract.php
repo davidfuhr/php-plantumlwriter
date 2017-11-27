@@ -34,6 +34,23 @@ abstract class WriterAbstract
     }
 
     /**
+     * @param integer $times How much indentation needed to be repeated
+     * @param bool $addingTabs Whether appending tab character after each indentation
+     * @return string
+     */
+    public function indenting($times = 1, $addingTabs = false)
+    {
+        $tabChar = $addingTabs ? '\t' : '';
+
+        $indent = '';
+        for ($i=0; $i < $times; $i++) {
+            $tab = $i==0 ? '' : $tabChar;
+            $indent .= $this->indent . $tab;
+        }
+        return $indent;
+    }
+
+    /**
      * @param \TokenReflection\IReflectionClass $declaringClass The class using the namespace aliases
      * @param string $aliasedClassName The class name used in the declaring class
      * @return string
@@ -67,17 +84,21 @@ abstract class WriterAbstract
      * @param mixed $value
      * @return string
      */
-    protected function formatValue($value)
+    protected function formatValue($value, $_arrayDepth = 0)
     {
         if (is_null($value)) {
             $value = 'null';
         }
         else if (is_array($value)) {
             $formattedValues = array();
-            foreach ($value as $currentValue) {
-                $formattedValues[] = $this->formatValue($currentValue);
+            $_arrayDepth++;
+            foreach ($value as $key => $currentValue) {
+                // recursively formatting array values
+                $formattedValues[] = $this->formatValue($key) . ' => ' . $this->formatValue($currentValue, $_arrayDepth);
             }
-            $value = '[' .implode(', ', $formattedValues) . ']';
+            $value = count($formattedValues) > 0
+                ? "[\n{$this->indenting($_arrayDepth+1, true)}" .implode(",\n{$this->indenting($_arrayDepth+1, true)}", $formattedValues) . "\n{$this->indenting($_arrayDepth, true)}]"
+                : '[' .implode(', ', $formattedValues) . ']';
         }
         else if (is_numeric($value)) {
             // nothing to do here
@@ -92,6 +113,7 @@ abstract class WriterAbstract
                 "\n" => '\\\\n',
                 "\r" => '\\\\r',
                 "\t" => '\\\\t',
+                "\l" => '\\\\l',
             ));
             $value = '"' . $value . '"';
         }

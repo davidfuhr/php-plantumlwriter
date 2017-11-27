@@ -52,6 +52,7 @@ class WriteCommand extends Command
         }
 
         $output->write('@startuml', "\n");
+        $output->write('skinparam handwritten true', "\n");
         foreach ($broker->getClasses() as $class) {
             /** @var $class \TokenReflection\IReflectionClass */
             $output->write($classWriter->writeElement($class));
