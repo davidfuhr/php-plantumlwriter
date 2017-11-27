@@ -74,10 +74,12 @@ abstract class WriterAbstract
         }
         else if (is_array($value)) {
             $formattedValues = array();
-            foreach ($value as $currentValue) {
-                $formattedValues[] = $this->formatValue($currentValue);
+            foreach ($value as $key => $currentValue) {
+                $formattedValues[] = $this->formatValue($key) . ' => ' . $this->formatValue($currentValue);
             }
-            $value = '[' .implode(', ', $formattedValues) . ']';
+            $value = count($formattedValues) > 5
+                ? "[\n        " .implode(",\n        ", $formattedValues) . "\n    ]"
+                : '[' .implode(', ', $formattedValues) . ']';
         }
         else if (is_numeric($value)) {
             // nothing to do here
@@ -92,6 +94,7 @@ abstract class WriterAbstract
                 "\n" => '\\\\n',
                 "\r" => '\\\\r',
                 "\t" => '\\\\t',
+                "\l" => '\\\\l',
             ));
             $value = '"' . $value . '"';
         }
