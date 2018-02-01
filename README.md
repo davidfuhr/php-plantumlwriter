@@ -100,8 +100,3 @@ Future Plans
   If doctrine annotations are present we can use them.
 - Evaluate Implementation of Visitor Pattern
 - Implement own set of Interfaces
-
-Alternatives
-------------
-
-- http://westhoffswelt.de/projects/phuml.html
